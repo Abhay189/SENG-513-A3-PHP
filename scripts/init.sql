@@ -5,13 +5,11 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL
 );
 
--- Insert default admin user
-INSERT INTO users (username, password) VALUES ('admin', 'password');
-
 -- Create additional table and insert data
-CREATE TABLE other_table (
+CREATE TABLE admins (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL
 );
 
-INSERT INTO other_table (name) VALUES ('Some Data');
+INSERT INTO admins (username, password) VALUES ('admin', 'password');

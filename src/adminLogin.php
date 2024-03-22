@@ -25,24 +25,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($stmt->rowCount() == 1) {
             $admin = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        
             // Verify the password
             if (password_verify($password, $admin['password'])) {
                 // Password is correct, start a new session
                 $_SESSION['admin_logged_in'] = true;
                 $_SESSION['admin_username'] = $admin['username'];
                 
-                // Redirect to the admin dashboard or homepage
-                header('Location: admin.php');
+                // Redirect to the admin dashboard
+                header('Location: adminDashboard.php');
                 exit();
             } else {
                 // Password is not correct
                 echo "The password you entered was not valid.";
             }
         } else {
+            // No account found with that username
             echo "No account found with that username.";
-        }
+        }        
     } catch(PDOException $e) {
+        // Catch and display error
         echo "Error: " . $e->getMessage();
     }
 } else {

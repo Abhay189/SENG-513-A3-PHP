@@ -12,4 +12,4 @@ CREATE TABLE admins (
     password VARCHAR(255) NOT NULL
 );
 
-INSERT INTO admins (username, password) VALUES ('admin', 'password');
+INSERT INTO admins (username, password) VALUES ('admin', '$2y$10$LfmD2lDn0KrJZSMJiOtRG.fv0FTj9nUIuZ4cQWloqvibi.s3ExXPm');

@@ -19,24 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $conn = new PDO($dsn, $dbUsername, $dbPassword);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "<br>Database Connected successfully<br>";
-
 
         $stmt = $conn->prepare($sql);
         $stmt->execute(['username' => $username, 'password' => $password]);
-        echo "Signup successful.";
+        
+        // Start session and set session variables upon successful signup
+        session_start();
+        $_SESSION['user_logged_in'] = true;
+        $_SESSION['username'] = $username;
 
+        // Redirect to landingPage.php after successful signup
+        header('Location: landingPage.php');
+        exit();
 
-        // Select and display all users
-        $sql = "SELECT id, username, password FROM users";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        echo "All users:<br>";
-        foreach ($results as $row) {
-            echo "Id: " . htmlspecialchars($row['id']) . " - Username: " . htmlspecialchars($row['username']) . " - Password: " . htmlspecialchars($row['password']) . "<br>";
-        }
     } catch(PDOException $e) {
         echo "Error: " . $e->getMessage();
     }

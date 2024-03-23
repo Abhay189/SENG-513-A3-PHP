@@ -10,6 +10,12 @@ services:
       - ./src:/var/www/html
     depends_on:
       - db
+    environment:
+      DB_SERVERNAME: db
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DATABASE: ${MYSQL_DATABASE}
+      DB_PORT: 3306
   db:
     build:
       context: .

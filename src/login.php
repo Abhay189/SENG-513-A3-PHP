@@ -3,11 +3,11 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Database connection parameters
-    $dbServername = "db";
-    $dbUsername = "user";
-    $dbPassword = "password";
-    $database = "my_db";
-    $port = 3306;
+    $dbServername = getenv('DB_SERVERNAME');
+    $dbUsername = getenv('DB_USERNAME');
+    $dbPassword = getenv('DB_PASSWORD');
+    $database = getenv('DATABASE');
+    $port = getenv('DB_PORT');
     $dsn = "mysql:host=$dbServername;dbname=$database;port=$port";
     
     // Process form data
